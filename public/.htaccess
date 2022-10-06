@@ -1,0 +1,13 @@
+# Fix to not let Apache strip the Bearer Authentication scheme, when using JWT authentication
+RewriteCond     %{HTTP:Authorization} ^(.*)
+RewriteRule     .* - [e=HTTP_AUTHORIZATION:%1]
+
+# Quick 404 for non-existing assets
+ReWriteCond     %{REQUEST_FILENAME}     !-f
+ReWriteCond     %{REQUEST_FILENAME}     !-d
+RewriteRule     ^(build|bundles|images)/ - [R=404,L]
+
+# Load front controller
+ReWriteCond     %{REQUEST_FILENAME}     !-f
+ReWriteCond     %{REQUEST_FILENAME}     !-d
+ReWriteRule     ^.+                     /index.php      [L,PT,QSA]
