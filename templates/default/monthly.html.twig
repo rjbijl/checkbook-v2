@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+   <h1>Maandoverzicht</h1>
+
+   {% for month, data in months %}
+   <h2>{{ month }}</h2>
+   <table class="table table-striped table-hover">
+      <thead>
+         <tr>
+            <th>Categorie</th>
+            <th>Totaal</th>
+            <th>&nbsp;</th>
+         </tr>
+      </thead>
+      <tbody>
+      {% for category, cat_data in data.categories %}
+         <tr>
+            <td>{{ category }}</td>
+            <td>&euro; {{ (cat_data.amount / 100)|number_format(2, ',', '.') }}</td>
+            <td>+</td>
+         </tr>
+         <tr>
+            <td colspan="3">
+               <table>
+                  {% for mutation in cat_data.mutations %}
+                     <tr>
+                        <td>{{ mutation.accountNumber }}</td>
+                        <td>{{ mutation.date|date('d-m-Y') }}</td>
+                        <td>{{ mutation.contraAccountName }}</td>
+                        <td style="max-width: 500px">{{ mutation.description }}</td>
+                        <td>&euro; {% if 'credit' == mutation.type %}- {% endif %} {{ (mutation.amount / 100)|number_format(2, ',', '.') }}</td>
+                     </tr>
+                  {% endfor %}
+               </table>
+            </td>
+         </tr>
+      {% endfor %}
+      </tbody>
+      <tfoot>
+      <tr>
+         <td>Totaal</td>
+         <td>&euro; {{ (data.amount / 100)|number_format(2, ',', '.') }}</td>
+      </tr>
+      </tfoot>
+   </table>
+   {% endfor %}
+{% endblock %}
