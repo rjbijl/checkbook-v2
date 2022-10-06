@@ -1,0 +1,24 @@
+parameters:
+    tmpDir: %currentWorkingDirectory%/var/cache/phpstan
+    level: max
+    paths:
+        - %currentWorkingDirectory%/src
+        - %currentWorkingDirectory%/tests
+    symfony:
+        console_application_loader: tests/console-application.php
+        containerXmlPath: var/cache/dev/App_KernelDevDebugContainer.xml
+    doctrine:
+        objectManagerLoader: tests/object-manager.php
+        repositoryClass: Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository
+    checkGenericClassInNonGenericObjectType: false
+    scanDirectories:
+        - var/cache/dev/Symfony/Config
+    ignoreErrors:
+        -
+            message: '#Method App\\Repository\\MutationRepository::findWithFilter\(\) should return array<App\\Entity\\Mutation> but returns mixed\.#'
+            path: src/Repository/MutationRepository.php
+includes:
+    - vendor/phpstan/phpstan-doctrine/extension.neon
+    - vendor/phpstan/phpstan-doctrine/rules.neon
+    - vendor/phpstan/phpstan-symfony/extension.neon
+    - vendor/phpstan/phpstan-symfony/rules.neon
