@@ -8,22 +8,21 @@ use App\Entity\Mutation;
 use App\Form\Type\MutationFilterType;
 use App\Model\Mutation\Filter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
 final class DefaultController extends AbstractController
 {
     /**
      * @Route("/", name="homepage")
-     *
-     * @param Request $request
-     * @return Response
      */
     public function index(Request $request): Response
     {
         $filter = new Filter();
-        $filterForm = $this->createForm(MutationFilterType::class, $filter, ['method' => 'get']);
+        $filterForm = $this->createForm(MutationFilterType::class, $filter, [
+            'method' => 'get',
+        ]);
         $filterForm->handleRequest($request);
 
         $mutations = $this->getDoctrine()->getRepository(Mutation::class)->findWithFilter($filter);
@@ -50,7 +49,6 @@ final class DefaultController extends AbstractController
     /**
      * @Route("/monthly", name="monthly")
      *
-     * @param Request $request
      * @return Response
      */
     public function monthlyAction(Request $request)
@@ -59,7 +57,7 @@ final class DefaultController extends AbstractController
 
         $months = [];
         /** @var Mutation $mutation */
-        foreach($this->getDoctrine()->getRepository(Mutation::class)->findAll() as $mutation) {
+        foreach ($this->getDoctrine()->getRepository(Mutation::class)->findAll() as $mutation) {
             if (in_array($mutation->getContraAccountNumber(), $ownAccounts)) {
                 continue;
             }

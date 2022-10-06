@@ -25,7 +25,7 @@ class MutationRepository extends ServiceEntityRepository
 
         if ($startDate = $filter->getStartDate()) {
             $qb->andWhere('m.date >= :startDate')
-                ->setParameter('startDate',$startDate)
+                ->setParameter('startDate', $startDate)
             ;
         }
 

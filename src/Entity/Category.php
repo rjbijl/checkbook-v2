@@ -13,8 +13,6 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Entity
  * @ORM\Table(name="category")
- *
- * @package App\Entity
  */
 class Category
 {
@@ -48,15 +46,16 @@ class Category
      */
     private Collection $mutations;
 
-    /**
-     * Category constructor.
-     * @param string $name
-     */
     public function __construct(string $name)
     {
         $this->name = $name;
         $this->mutations = new ArrayCollection();
         $this->children = new ArrayCollection();
+    }
+
+    public function __toString(): string
+    {
+        return $this->name;
     }
 
     public function getId(): int
@@ -75,12 +74,12 @@ class Category
         return $this;
     }
 
-    public function getParent(): ?Category
+    public function getParent(): ?self
     {
         return $this->parent;
     }
 
-    public function setParent(Category $parent): self
+    public function setParent(self $parent): self
     {
         if ($this->parent !== $parent) {
             $this->parent = $parent;
@@ -128,7 +127,7 @@ class Category
         return $this;
     }
 
-    public function addChild(Category $child): self
+    public function addChild(self $child): self
     {
         if (!$this->children->contains($child)) {
             $this->children->add($child);
@@ -136,10 +135,5 @@ class Category
         }
 
         return $this;
-    }
-
-    public function __toString(): string
-    {
-        return $this->name;
     }
 }

@@ -12,9 +12,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class MutationFilterType extends AbstractType
 {
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -23,7 +20,7 @@ class MutationFilterType extends AbstractType
                     'class' => 'datepicker form-input',
                 ],
                 'widget' => 'single_text',
-                'required'   => false,
+                'required' => false,
                 'label_attr' => [
                     'class' => 'form-label',
                 ],
@@ -33,7 +30,7 @@ class MutationFilterType extends AbstractType
                     'class' => 'datepicker form-input',
                 ],
                 'widget' => 'single_text',
-                'required'   => false,
+                'required' => false,
                 'label_attr' => [
                     'class' => 'form-label',
                 ],
@@ -41,9 +38,9 @@ class MutationFilterType extends AbstractType
             ->add('category', EntityType::class, [
                 'class' => Category::class,
                 'choice_label' => 'name',
-                'required'   => false,
+                'required' => false,
                 'attr' => [
-                    'class' => 'form-input'
+                    'class' => 'form-input',
                 ],
                 'label_attr' => [
                     'class' => 'form-label',
@@ -52,9 +49,6 @@ class MutationFilterType extends AbstractType
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([

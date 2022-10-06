@@ -9,13 +9,11 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Entity(repositoryClass="App\Repository\MutationRepository")
  * @ORM\Table(name="mutation", uniqueConstraints={@ORM\UniqueConstraint(name="identifier_idx", columns={"account_number", "identifier"})}))
- *
- * @package App\Entity
  */
 class Mutation
 {
-    const TYPE_DEBIT = 'debit';
-    const TYPE_CREDIT = 'credit';
+    public const TYPE_DEBIT = 'debit';
+    public const TYPE_CREDIT = 'credit';
 
     /**
      * @var int
@@ -79,141 +77,89 @@ class Mutation
      */
     private ?Category $category = null;
 
-    /**
-     * @return int
-     */
     public function getId(): int
     {
         return $this->id;
     }
 
-    /**
-     * @return \DateTimeInterface
-     */
     public function getDate(): \DateTimeInterface
     {
         return $this->date;
     }
 
-    /**
-     * @param \DateTimeInterface $date
-     * @return Mutation
-     */
-    public function setDate(\DateTimeInterface $date): Mutation
+    public function setDate(\DateTimeInterface $date): self
     {
         $this->date = $date;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getAccountNumber(): string
     {
         return $this->accountNumber;
     }
 
-    /**
-     * @param string $accountNumber
-     * @return Mutation
-     */
-    public function setAccountNumber(string $accountNumber): Mutation
+    public function setAccountNumber(string $accountNumber): self
     {
         $this->accountNumber = $accountNumber;
 
         return $this;
     }
 
-    /**
-     * @return int
-     */
     public function getAmount(): int
     {
         return $this->amount;
     }
 
-    /**
-     * @param int $amount
-     * @return Mutation
-     */
-    public function setAmount(int $amount): Mutation
+    public function setAmount(int $amount): self
     {
         $this->amount = $amount;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getType(): string
     {
         return $this->type;
     }
 
-    /**
-     * @param string $type
-     * @return Mutation
-     */
-    public function setType(string $type): Mutation
+    public function setType(string $type): self
     {
         $this->type = $type;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getDescription(): string
     {
         return $this->description;
     }
 
-    /**
-     * @param string $description
-     * @return Mutation
-     */
-    public function setDescription(string $description): Mutation
+    public function setDescription(string $description): self
     {
         $this->description = $description;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getContraAccountName(): string
     {
         return $this->contraAccountName;
     }
 
-    /**
-     * @param string $contraAccountName
-     * @return Mutation
-     */
-    public function setContraAccountName(string $contraAccountName): Mutation
+    public function setContraAccountName(string $contraAccountName): self
     {
         $this->contraAccountName = $contraAccountName;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getContraAccountNumber(): string
     {
         return $this->contraAccountNumber;
     }
 
-    /**
-     * @param string $contraAccountNumber
-     * @return Mutation
-     */
-    public function setContraAccountNumber(string $contraAccountNumber): Mutation
+    public function setContraAccountNumber(string $contraAccountNumber): self
     {
         $this->contraAccountNumber = $contraAccountNumber;
 
@@ -225,11 +171,7 @@ class Mutation
         return $this->category;
     }
 
-    /**
-     * @param Category $category
-     * @return Mutation
-     */
-    public function setCategory(Category $category): Mutation
+    public function setCategory(Category $category): self
     {
         if ($this->category !== $category) {
             $this->category = $category;
@@ -239,19 +181,12 @@ class Mutation
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getIdentifier(): string
     {
         return $this->identifier;
     }
 
-    /**
-     * @param string $identifier
-     * @return Mutation
-     */
-    public function setIdentifier(string $identifier): Mutation
+    public function setIdentifier(string $identifier): self
     {
         $this->identifier = $identifier;
 
