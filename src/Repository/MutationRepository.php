@@ -15,10 +15,9 @@ class MutationRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param Filter $filter
-     * @return array
+     * @return array<Mutation>
      */
-    public function findWithFilter(Filter $filter) :array
+    public function findWithFilter(Filter $filter): array
     {
         $qb = $this->createQueryBuilder('m')
             ->orderBy('m.date', 'ASC')
@@ -26,19 +25,19 @@ class MutationRepository extends ServiceEntityRepository
 
         if ($startDate = $filter->getStartDate()) {
             $qb->andWhere('m.date >= :startDate')
-                ->setParameter('startDate', $filter->getStartDate())
+                ->setParameter('startDate',$startDate)
             ;
         }
 
         if ($endDate = $filter->getEndDate()) {
             $qb->andWhere('m.date <= :endDate')
-                ->setParameter('endDate', $filter->getEndDate())
+                ->setParameter('endDate', $endDate)
             ;
         }
 
         if ($category = $filter->getCategory()) {
             $qb->andWhere('m.category = :category')
-                ->setParameter('category', $filter->getCategory())
+                ->setParameter('category', $category)
             ;
         }
 

@@ -1,8 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -16,37 +19,34 @@ use Doctrine\ORM\Mapping as ORM;
 class Category
 {
     /**
-     * @var int
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(name="id", type="integer")
      */
-    private $id;
+    private int $id;
 
     /**
-     * @var Category
      * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="children")
      * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", onDelete="CASCADE")
      */
-    private $parent = null;
+    private ?Category $parent = null;
 
     /**
-     * @var ArrayCollection
+     * @var Collection<Category>
      * @ORM\OneToMany(targetEntity="App\Entity\Category", mappedBy="parent")
      */
-    private $children;
+    private Collection $children;
 
     /**
-     * @var string
      * @ORM\Column(name="name", type="string")
      */
-    private $name;
+    private string $name;
 
     /**
-     * @var ArrayCollection
+     * @var Collection<Mutation>
      * @ORM\OneToMany(targetEntity="App\Entity\Mutation", mappedBy="category")
      */
-    private $mutations;
+    private Collection $mutations;
 
     /**
      * Category constructor.
@@ -59,44 +59,28 @@ class Category
         $this->children = new ArrayCollection();
     }
 
-    /**
-     * @return int
-     */
     public function getId(): int
     {
         return $this->id;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @param string $name
-     * @return Category
-     */
-    public function setName(string $name): Category
+    public function setName(string $name): self
     {
         $this->name = $name;
         return $this;
     }
 
-    /**
-     * @return Category
-     */
-    public function getParent(): Category
+    public function getParent(): ?Category
     {
         return $this->parent;
     }
 
-    /**
-     * @param Category $parent
-     */
-    public function setParent(Category $parent)
+    public function setParent(Category $parent): self
     {
         if ($this->parent !== $parent) {
             $this->parent = $parent;
@@ -107,28 +91,20 @@ class Category
     }
 
     /**
-     * @return ArrayCollection
+     * @return Collection<Mutation>
      */
-    public function getMutations(): ArrayCollection
+    public function getMutations(): Collection
     {
         return $this->mutations;
     }
 
-    /**
-     * @param ArrayCollection $mutations
-     * @return Category
-     */
-    public function setMutations(ArrayCollection $mutations): Category
+    public function setMutations(Collection $mutations): self
     {
         $this->mutations = $mutations;
         return $this;
     }
 
-    /**
-     * @param Mutation $mutation
-     * @return Category
-     */
-    public function addMutation(Mutation $mutation): Category
+    public function addMutation(Mutation $mutation): self
     {
         if (!$this->mutations->contains($mutation)) {
             $this->mutations->add($mutation);
@@ -137,29 +113,22 @@ class Category
 
         return $this;
     }
+
     /**
-     * @return ArrayCollection
+     * @return Collection<Category>
      */
-    public function getChildren(): ArrayCollection
+    public function getChildren(): Collection
     {
         return $this->children;
     }
 
-    /**
-     * @param ArrayCollection $children
-     * @return Category
-     */
-    public function setChildren(ArrayCollection $children): Category
+    public function setChildren(Collection $children): self
     {
         $this->children = $children;
         return $this;
     }
 
-    /**
-     * @param Category $child
-     * @return Category
-     */
-    public function addChild(Category $child): Category
+    public function addChild(Category $child): self
     {
         if (!$this->children->contains($child)) {
             $this->children->add($child);
@@ -169,7 +138,7 @@ class Category
         return $this;
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return $this->name;
     }

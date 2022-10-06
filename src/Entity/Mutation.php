@@ -74,11 +74,10 @@ class Mutation
     private $identifier;
 
     /**
-     * @var Category
      * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="mutations")
      * @ORM\JoinColumn(referencedColumnName="id", onDelete="SET NULL")
      */
-    private $category;
+    private ?Category $category = null;
 
     /**
      * @return int
@@ -103,6 +102,7 @@ class Mutation
     public function setDate(\DateTimeInterface $date): Mutation
     {
         $this->date = $date;
+
         return $this;
     }
 
@@ -121,6 +121,7 @@ class Mutation
     public function setAccountNumber(string $accountNumber): Mutation
     {
         $this->accountNumber = $accountNumber;
+
         return $this;
     }
 
@@ -139,6 +140,7 @@ class Mutation
     public function setAmount(int $amount): Mutation
     {
         $this->amount = $amount;
+
         return $this;
     }
 
@@ -157,6 +159,7 @@ class Mutation
     public function setType(string $type): Mutation
     {
         $this->type = $type;
+
         return $this;
     }
 
@@ -175,6 +178,7 @@ class Mutation
     public function setDescription(string $description): Mutation
     {
         $this->description = $description;
+
         return $this;
     }
 
@@ -193,6 +197,7 @@ class Mutation
     public function setContraAccountName(string $contraAccountName): Mutation
     {
         $this->contraAccountName = $contraAccountName;
+
         return $this;
     }
 
@@ -211,13 +216,11 @@ class Mutation
     public function setContraAccountNumber(string $contraAccountNumber): Mutation
     {
         $this->contraAccountNumber = $contraAccountNumber;
+
         return $this;
     }
 
-    /**
-     * @return Category
-     */
-    public function getCategory()
+    public function getCategory(): ?Category
     {
         return $this->category;
     }
@@ -232,6 +235,7 @@ class Mutation
             $this->category = $category;
             $category->addMutation($this);
         }
+
         return $this;
     }
 
@@ -250,6 +254,7 @@ class Mutation
     public function setIdentifier(string $identifier): Mutation
     {
         $this->identifier = $identifier;
+
         return $this;
     }
 }

@@ -6,72 +6,45 @@ use App\Entity\Category;
 
 class Filter
 {
-    /**
-     * @var \DateTimeInterface
-     */
-    private $startDate;
+    private ?\DateTimeInterface $startDate = null;
 
-    /**
-     * @var \DateTimeInterface
-     */
-    private $endDate;
+    private ?\DateTimeInterface $endDate = null;
 
-    /**
-     * @var Category
-     */
-    private $category;
+    private ?Category $category = null;
 
-    /**
-     * @return \DateTimeInterface
-     */
-    public function getStartDate()
+    public function getStartDate(): ?\DateTimeInterface
     {
         return $this->startDate;
     }
 
-    /**
-     * @param \DateTimeInterface $startDate
-     * @return Filter
-     */
-    public function setStartDate(\DateTimeInterface $startDate = null): Filter
+    public function setStartDate(?\DateTimeInterface $startDate = null): self
     {
         $this->startDate = $startDate;
+
         return $this;
     }
 
-    /**
-     * @return \DateTimeInterface
-     */
-    public function getEndDate()
+    public function getEndDate(): ?\DateTimeInterface
     {
         return $this->endDate;
     }
 
-    /**
-     * @param \DateTimeInterface $endDate
-     * @return Filter
-     */
-    public function setEndDate(\DateTimeInterface $endDate = null): Filter
+    public function setEndDate(?\DateTimeInterface $endDate = null): self
     {
         $this->endDate = $endDate;
+
         return $this;
     }
 
-    /**
-     * @return Category
-     */
-    public function getCategory()
+    public function getCategory(): ?Category
     {
         return $this->category;
     }
 
-    /**
-     * @param Category $category
-     * @return Filter
-     */
-    public function setCategory(Category $category = null): Filter
+    public function setCategory(?Category $category = null): self
     {
         $this->category = $category;
+
         return $this;
     }
 }
