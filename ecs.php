@@ -23,11 +23,6 @@ return static function (ECSConfig $containerConfigurator): void {
     ]);
 
     $containerConfigurator->skip([
-        // Bundle configuration is indented on purpose
-        MethodChainingIndentationFixer::class => [
-            __DIR__ . '/src/Prezent/*/DependencyInjection/Configuration.php',
-        ],
-
         // Do not force space after `not` operator
         NotOperatorWithSuccessorSpaceFixer::class,
 
@@ -92,6 +87,9 @@ return static function (ECSConfig $containerConfigurator): void {
                 'use',
             ],
         ]]);
+
+    $services->set(\PhpCsFixer\Fixer\Strict\DeclareStrictTypesFixer::class);
+
     $services->set(\PhpCsFixer\Fixer\Phpdoc\NoBlankLinesAfterPhpdocFixer::class);
     $services->set(\PhpCsFixer\Fixer\Phpdoc\PhpdocNoPackageFixer::class);
     $services->set(\PhpCsFixer\Fixer\Phpdoc\PhpdocScalarFixer::class);
